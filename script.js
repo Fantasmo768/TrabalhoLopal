@@ -1,4 +1,4 @@
-let promptSync = require('prompt-sync')
+let promptSync = require('prompt-sync')();
 let fs = require('fs')
 let path = require('path')
 
@@ -17,7 +17,7 @@ let calculo = 0;
 while (rodarCodigo == true) {
     
     //#region Nome
-    let nome = promptSync(`Digite o nome do ${quantidade}° cliente (digite "parar" no nome para parar o programa)`);
+    let nome = promptSync(`Digite o nome do ${quantidade}° cliente (digite "parar" no tipo para parar o programa)`);
     if (nome == "parar") {
         rodarCodigo = false
     } else if (!isNaN(nome)) {
@@ -26,11 +26,7 @@ while (rodarCodigo == true) {
     //#endregion
 
     //#region endereço
-    region
     let endereço = promptSync(`Digite o endereço do ${quantidade + 1}° cliente`);
-    if (!isNaN(endereço)) {
-        endereço = promptSync(`Por favor, não digite nenhum número`)
-    }
     //#endregion
 
     //#region distancia
@@ -46,12 +42,16 @@ while (rodarCodigo == true) {
         valor = promptSync(`Por favor, não digite letras`)
     }
     //#endregion
+    
+    //#region tipo
     let tipo = promptSync(`Digite o tipo de entrega do ${quantidade + 1}° cliente (escolha entre normal e urgente)`);
 
+    //#region Adicionar valores as arrays
     nomes[quantidade] = nome;
     endereços[quantidade] = endereço;
     distancias[quantidade] = distancia;
     valores[quantidade] = valor;
     tipos[quantidade] = tipo;
     quantidade++
+    //#endregion
 }
