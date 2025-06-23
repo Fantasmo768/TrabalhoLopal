@@ -65,6 +65,14 @@ while (rodarCodigo == true) {
 }
 }
 
+console.log(`Informações das ${quantidade} entregas`)
+    console.log(`Nomes: ${nomes}`)
+     console.log(`Endereços: ${endereços}`)
+      console.log(`valores: ${valores}`)
+       console.log(`tipos: ${tipos}`)
+       console.log(`Média ${media}`)
+        console.log(`Soma dos valores totais ${soma}`)
+
     fs.appendFileSync("./log.txt", `\n${nomes}\n`, "utf-8")
     fs.appendFileSync("./log.txt", `${endereços}\n`, "utf-8")
     fs.appendFileSync("./log.txt", `${distancias}\n`, "utf-8")
