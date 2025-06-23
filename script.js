@@ -41,3 +41,11 @@ while (rodarCodigo==true) {
     tipos[quantidade] = tipo;
     quantidade++
 }
+
+console.log(`Informações das ${quantidade} entregas`)
+    console.log(`Nomes: ${nomes}`)
+     console.log(`Endereços: ${endereços}`)
+      console.log(`valores: ${valores}`)
+       console.log(`tipos: ${tipos}`)
+       console.log(`Média ${media}`)
+        console.log(`Soma dos valores totais ${soma}`)
