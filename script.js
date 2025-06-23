@@ -11,7 +11,12 @@ let rodarCodigo = true;
 let quantidade = 0; 
 let calculos = []; //Vetor para armazenar valores dos cálculos
 let calculo = 0;
+let conteudoArquivo = "----Histórico de entregas----"
 
+
+if (!fs.existsSync("./log.txt")) {
+fs.writeFileSync("./log.txt", conteudoArquivo, "utf-8")
+}
 
 while (rodarCodigo==true) {
     let nome = promptSync(`Digite o nome do ${quantidade}° cliente (digite "parar" no nome para parar o programa)`); //
@@ -41,3 +46,9 @@ while (rodarCodigo==true) {
     tipos[quantidade] = tipo;
     quantidade++
 }
+
+   fs.appendFileSync("./log.txt", `\n${nomes}\n`, "utf-8")
+    fs.appendFileSync("./log.txt", `${endereços}\n`, "utf-8")
+    fs.appendFileSync("./log.txt", `${distancias}\n`, "utf-8")
+    fs.appendFileSync("./log.txt", `${valores}\n`, "utf-8")
+    fs.appendFileSync("./log.txt", `${tipos}`, "utf-8")
