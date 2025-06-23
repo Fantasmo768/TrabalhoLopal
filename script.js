@@ -5,23 +5,35 @@ let path = require('path')
 //#region variaveis
 let conteudoArquivo = "----Histórico de entregas----"
 let nomes = []; //Vetor para armazenar valores dos nomes
-let endereços = []; //Vetor para armazenar valores dos endereços
+let enderecos = []; //Vetor para armazenar valores dos enderecos
 let distancias = []; //Vetor para armazenar valores das distâncias
 let valores = []; //Vetor para armazenar valores dos valores
 let tipos = [];
 let rodarCodigo = true;
-let quantidade = 0;
+let i = 0;
 let calculos = []; //Vetor para armazenar valores dos cálculos
 let calculo = 0;
 let soma = 0;
+let media = 0;
+let mensagemTipo = "";
+let mensagensTipo = [];
+let nome = "";
+let endereco;
+let distancia = 0;
+let valor = 0;
+let tipo = 0;
 //#endregion
+
+if (!fs.existsSync("./log.txt")) {
+    fs.writeFileSync("./log.txt", conteudoArquivo, "utf-8")
+}
 
 while (rodarCodigo == true) {
     
     //#region nome
-    let nome = promptSync(`Digite o nome do ${quantidade}° cliente (digite "-" no tipo para parar o programa)`);
+    nome = promptSync(`Digite o nome do ${i+1}° cliente (digite "-" no tipo para parar o programa): `);
     while (!isNaN(nome)) {
-        nome = promptSync(`Por favor, não digite nenhum número`)
+        nome = promptSync(`Por favor, não digite nenhum número: `)
     }
     if (nome == "-") {
         rodarCodigo = false
@@ -29,60 +41,71 @@ while (rodarCodigo == true) {
     //#endregion
 
     if (nome != "-") {
-    //#region endereço
-    let endereço = promptSync(`Digite o endereço do ${quantidade + 1}° cliente`);
+    nomes[i] = nome;
+    //#region endereco
+    endereco = promptSync(`Digite o endereco do ${i + 1}° cliente: `);
+    enderecos[i] = endereco;
     //#endregion
 
     //#region distancia
-    let distancia = parseInt(promptSync(`Digite a distância de entrega do ${quantidade}° cliente (em quilometros)`));
-    if (isNaN(distancia)) {
-        distancia = promptSync(`Por favor, não digite letras`)
+    distancia = parseFloat(promptSync(`Digite a distância de entrega do ${i+1}° cliente (em quilometros) `));
+    while (isNaN(distancia) || distancia <= 0) {
+        distancia = parseFloat(promptSync(`Por favor, não digite letras ou valores negativos `))
     }
+    distancias[i] = parseFloat(distancia.toFixed(2));
     //#endregion
 
     //#region valor
-    let valor = parseInt(promptSync(`Digite o valor de cada KM do ${quantidade + 1}° cliente (em reais)`));
-    if (isNaN(valor)) {
-        valor = promptSync(`Por favor, não digite letras`)
+    valor = parseFloat(promptSync(`Digite o valor de cada KM do ${i + 1}° cliente (em reais) `));
+    while (isNaN(valor) || valor <= 0) {
+        valor = parseFloat(promptSync(`Por favor, não digite letras ou valores negativos `))
     }
+    valores[i] = parseFloat(valor.toFixed(2));
     //#endregion
     
     //#region tipo
-    let tipo = parseInt(promptSync(`Digite o tipo de entrega do ${quantidade + 1}° cliente (digite 1 para normal 2 para urgente)`));
-    while (isNaN(tipo) || tipo != 1 || tipo != 2) {
-            valor = promptSync(`Por favor, digite 1 ou 2`)
+    tipo = parseInt(promptSync(`Digite o tipo de entrega do ${i + 1}° cliente (digite 1 para normal 2 para urgente) `));
+    while (isNaN(tipo) || tipo != 1 && tipo != 2) {
+            tipo = parseFloat(promptSync(`Por favor, digite 1 ou 2 `))
         }
     
     if (tipo == 1) {
     calculo = distancia*valor;
     soma += calculo;
+    mensagemTipo = "Normal"
 } else if (tipo == 2) {
     calculo = (distancia*valor) * 1.20;
     soma += calculo;
+    mensagemTipo = "Urgente"
 }
     //#endregion
 
     //#region Adicionar valores as arrays
-    nomes[quantidade] = nome;
-    endereços[quantidade] = endereço;
-    distancias[quantidade] = distancia;
-    valores[quantidade] = valor;
-    tipos[quantidade] = tipo;
-    quantidade++
+    calculos [i] = parseFloat(calculo.toFixed(2));
+    mensagensTipo [i] = mensagemTipo;
+    i++;
     //#endregion
 }
 }
 
-console.log(`Informações das ${quantidade} entregas`)
-    console.log(`Nomes: ${nomes}`)
-     console.log(`Endereços: ${endereços}`)
-      console.log(`valores: ${valores}`)
-       console.log(`tipos: ${tipos}`)
-       console.log(`Média ${media}`)
-        console.log(`Soma dos valores totais ${soma}`)
+media = soma / i;
 
-    fs.appendFileSync("./log.txt", `\n${nomes}\n`, "utf-8")
-    fs.appendFileSync("./log.txt", `${endereços}\n`, "utf-8")
-    fs.appendFileSync("./log.txt", `${distancias}\n`, "utf-8")
-    fs.appendFileSync("./log.txt", `${valores}\n`, "utf-8")
-    fs.appendFileSync("./log.txt", `${tipos}`, "utf-8")
+console.log(`Informacões das ${i+1} entregas:`)
+console.log(`Nomes: ${nomes}`)
+console.log(`Enderecos: ${enderecos}`)
+console.log(`Distancias: ${distancias}`)
+console.log(`valores (por KM): ${valores}`)
+console.log(`tipos: ${mensagensTipo}`)
+console.log(`Valor total de cada entrega: ${calculos}`)
+console.log(`Média: ${media.toFixed(2)}`)
+console.log(`Soma dos valores totais: ${soma.toFixed(2)}`)
+
+fs.appendFileSync("./log.txt", `\n\n Quantidade de entregas: ${i}\n`, "utf-8")
+fs.appendFileSync("./log.txt", `Nomes: ${nomes}\n`, "utf-8")
+fs.appendFileSync("./log.txt", `Enderecos: ${enderecos}\n`, "utf-8")
+fs.appendFileSync("./log.txt", `Distancias: ${distancias}\n`, "utf-8")
+fs.appendFileSync("./log.txt", `Valores (por KM): ${valores}\n`, "utf-8")
+fs.appendFileSync("./log.txt", `Tipos: ${mensagensTipo}\n`, "utf-8")
+fs.appendFileSync("./log.txt", `Valor total de cada entrega entregas: ${calculos}\n`, "utf-8")
+fs.appendFileSync("./log.txt", `Média dos valores: ${media.toFixed(2)}\n`, "utf-8")
+fs.appendFileSync("./log.txt", `Soma dos valores totais: ${soma.toFixed(2)}`, "utf-8")
