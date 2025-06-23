@@ -63,3 +63,9 @@ while (rodarCodigo == true) {
     //#endregion
 }
 }
+
+    fs.appendFileSync("./log.txt", `\n${nomes}\n`, "utf-8")
+    fs.appendFileSync("./log.txt", `${endereços}\n`, "utf-8")
+    fs.appendFileSync("./log.txt", `${distancias}\n`, "utf-8")
+    fs.appendFileSync("./log.txt", `${valores}\n`, "utf-8")
+    fs.appendFileSync("./log.txt", `${tipos}`, "utf-8")
