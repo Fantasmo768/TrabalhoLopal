@@ -1,6 +1,6 @@
 let promptSync = require('prompt-sync')();
-let fs = require('fs')
-let path = require('path')
+let fs = require('fs');
+let path = require('path');
 
 //#region variaveis
 let conteudoArquivo = "----Histórico de entregas----"
