@@ -3,6 +3,7 @@ let fs = require('fs')
 let path = require('path')
 
 //#region variaveis
+let conteudoArquivo = "----Histórico de entregas----"
 let nomes = []; //Vetor para armazenar valores dos nomes
 let endereços = []; //Vetor para armazenar valores dos endereços
 let distancias = []; //Vetor para armazenar valores das distâncias
