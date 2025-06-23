@@ -12,19 +12,22 @@ let rodarCodigo = true;
 let quantidade = 0;
 let calculos = []; //Vetor para armazenar valores dos cálculos
 let calculo = 0;
+let soma = 0;
 //#endregion
 
 while (rodarCodigo == true) {
     
-    //#region Nome
-    let nome = promptSync(`Digite o nome do ${quantidade}° cliente (digite "parar" no tipo para parar o programa)`);
-    if (nome == "parar") {
-        rodarCodigo = false
-    } else if (!isNaN(nome)) {
+    //#region nome
+    let nome = promptSync(`Digite o nome do ${quantidade}° cliente (digite "-" no tipo para parar o programa)`);
+    while (!isNaN(nome)) {
         nome = promptSync(`Por favor, não digite nenhum número`)
     }
+    if (nome == "-") {
+        rodarCodigo = false
+    } 
     //#endregion
 
+    if (nome != "-") {
     //#region endereço
     let endereço = promptSync(`Digite o endereço do ${quantidade + 1}° cliente`);
     //#endregion
@@ -44,7 +47,11 @@ while (rodarCodigo == true) {
     //#endregion
     
     //#region tipo
-    let tipo = promptSync(`Digite o tipo de entrega do ${quantidade + 1}° cliente (escolha entre normal e urgente)`);
+    let tipo = parseInt(promptSync(`Digite o tipo de entrega do ${quantidade + 1}° cliente (digite 1 para normal 2 para urgente)`));
+    while (isNaN(tipo) || tipo != 1 || tipo != 2) {
+            valor = promptSync(`Por favor, digite 1 ou 2`)
+        }
+    //#endregion
 
     //#region Adicionar valores as arrays
     nomes[quantidade] = nome;
@@ -54,4 +61,5 @@ while (rodarCodigo == true) {
     tipos[quantidade] = tipo;
     quantidade++
     //#endregion
+}
 }
