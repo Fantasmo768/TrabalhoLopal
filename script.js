@@ -52,6 +52,14 @@ while (rodarCodigo == true) {
     while (isNaN(tipo) || tipo != 1 || tipo != 2) {
             valor = promptSync(`Por favor, digite 1 ou 2`)
         }
+    
+    if (tipo == 1) {
+    calculo = distancia*valor;
+    soma += calculo;
+} else if (tipo == 2) {
+    calculo = (distancia*valor) * 1.20;
+    soma += calculo;
+}
     //#endregion
 
     //#region Adicionar valores as arrays
